@@ -1,0 +1,24 @@
+'use strict';
+
+import common from './common';
+import exportStatus from './exportStatus';
+<<<<<<< dest
+=======
+import exportTypes from './exportTypes';
+import exportStatistic from './exportStatistic';
+import violationTypes from './violationTypes';
+import exportCollage from './exportCollage';
+>>>>>>> source
+
+export default {
+  ...common,
+<<<<<<< dest
+  ...exportStatus
+=======
+  ...exportStatus,
+  ...exportTypes,
+  ...exportStatistic,
+  ...violationTypes,
+  ...exportCollage
+>>>>>>> source
+};

@@ -1,0 +1,126 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _redux = require('redux');
+
+var _common = require('./common');
+
+var common = _interopRequireWildcard(_common);
+
+var _exportTypes = require('./exportTypes');
+
+var exportTypes = _interopRequireWildcard(_exportTypes);
+
+var _exportStatus = require('./exportStatus');
+
+var exportStatus = _interopRequireWildcard(_exportStatus);
+
+var _exportStatistic = require('./exportStatistic');
+
+var exportStatistic = _interopRequireWildcard(_exportStatistic);
+
+var _violationTypes = require('./violationTypes');
+
+var violationTypes = _interopRequireWildcard(_violationTypes);
+
+var _exportCollage = require('./exportCollage');
+
+var exportCollage = _interopRequireWildcard(_exportCollage);
+
+var _recognitionChannels = require('./recognitionChannels');
+
+var recognitionChannels = _interopRequireWildcard(_recognitionChannels);
+
+var _trafficLights = require('./trafficLights');
+
+var trafficLights = _interopRequireWildcard(_trafficLights);
+
+var _exportVocordTef = require('./exportVocordTef');
+
+var exportVocordTef = _interopRequireWildcard(_exportVocordTef);
+
+var _exportPotokPlus = require('./exportPotokPlus');
+
+var exportPotokPlus = _interopRequireWildcard(_exportPotokPlus);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+exports.default = (0, _redux.combineReducers)({
+  exportTypes: (0, _redux.combineReducers)({
+    byId: exportTypes.byId,
+    ids: exportTypes.ids
+  }),
+  violationTypes: (0, _redux.combineReducers)({
+    byId: violationTypes.byId,
+    ids: violationTypes.ids
+  }),
+  recognitionChannels: (0, _redux.combineReducers)({
+    byId: recognitionChannels.byId,
+    ids: recognitionChannels.ids
+  }),
+  exportStatus: (0, _redux.combineReducers)({
+    exportEnabled: exportStatus.exportEnabled,
+    exportPotokPlusEnabled: exportStatus.exportPotokPlusEnabled,
+    repeatExportEnabled: exportStatus.repeatExportEnabled
+  }),
+  exportStatistic: exportStatistic.statistic,
+  exportCollage: (0, _redux.combineReducers)({
+    pictureTypes: (0, _redux.combineReducers)({
+      byId: exportCollage.pictureTypes.byId,
+      ids: exportCollage.pictureTypes.ids
+    }),
+    foregroundObjectTypes: (0, _redux.combineReducers)({
+      byId: exportCollage.foregroundObjectTypes.byId,
+      ids: exportCollage.foregroundObjectTypes.ids
+    }),
+    settingTypes: (0, _redux.combineReducers)({
+      byId: exportCollage.settingTypes.byId,
+      ids: exportCollage.settingTypes.ids
+    }),
+    settings: (0, _redux.combineReducers)({
+      byId: exportCollage.settings.byId,
+      ids: exportCollage.settings.ids
+    }),
+    videoExportModes: (0, _redux.combineReducers)({
+      byId: exportCollage.videoExportModes.byId,
+      ids: exportCollage.videoExportModes.ids
+    }),
+    collage: exportCollage.collage,
+    collageSelectedRectangle: exportCollage.selectedRectangle
+  }),
+  trafficLights: (0, _redux.combineReducers)({
+    overviewPicture: trafficLights.overviewPicture,
+    overviewPictureSelectedRectangle: trafficLights.overviewPictureSelectedRectangle,
+    settings: (0, _redux.combineReducers)({
+      byId: trafficLights.settings.byId,
+      ids: trafficLights.settings.ids
+    })
+  }),
+  exportVocordTef: (0, _redux.combineReducers)({
+    settings: exportVocordTef.settings,
+    videoExportSettings: exportVocordTef.videoExportSettings,
+    videoExportModes: (0, _redux.combineReducers)({
+      byId: exportVocordTef.videoExportModes.byId,
+      ids: exportVocordTef.videoExportModes.ids
+    })
+  }),
+  exportPotokPlus: (0, _redux.combineReducers)({
+    settings: exportPotokPlus.settings
+  }),
+  ui: (0, _redux.combineReducers)({
+    selectedExportTypeId: exportTypes.selectedExportTypeId,
+    selectedViolationTypeId: violationTypes.selectedViolationTypeId,
+    selectedRecognitionChannelId: recognitionChannels.selectedRecognitionChannelId,
+    selectedCollageVideoExportModeId: exportCollage.videoExportModes.selectedId,
+    selectedVocordTefVideoExportModeId: exportVocordTef.videoExportModes.selectedId,
+    selectedForegroundCollageObjectTypeId: exportCollage.foregroundObjectTypes.selectedId,
+    selectedCollageSettingTypeId: exportCollage.settingTypes.selectedId,
+    toast: common.toast
+  }),
+  requests: common.requests
+});
+
+//# sourceMappingURL=index-compiled.js.map

@@ -1,0 +1,7 @@
+.ImageEditor {
+  overflow: auto;
+}
+
+.ImageEditor canvas {
+  border: 1px solid #ddd;
+}

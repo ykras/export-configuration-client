@@ -1,0 +1,108 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = require('react-redux');
+
+require('./CollageEditor.css');
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _actions = require('../../store/actions');
+
+var _actions2 = _interopRequireDefault(_actions);
+
+var _selectors = require('../../store/selectors');
+
+var _selectors2 = _interopRequireDefault(_selectors);
+
+var _ImageEditor = require('../ImageEditor');
+
+var _ImageEditor2 = _interopRequireDefault(_ImageEditor);
+
+var _withLoadingIndicator = require('../../higher_order_components/withLoadingIndicator');
+
+var _withLoadingIndicator2 = _interopRequireDefault(_withLoadingIndicator);
+
+var _withDataRequest = require('../../higher_order_components/withDataFetch/withDataRequest');
+
+var _withDataRequest2 = _interopRequireDefault(_withDataRequest);
+
+var _withDataRefresh = require('../../higher_order_components/withDataFetch/withDataRefresh');
+
+var _withDataRefresh2 = _interopRequireDefault(_withDataRefresh);
+
+var _requestTypes = require('../../common/requestTypes');
+
+var _requestTypes2 = _interopRequireDefault(_requestTypes);
+
+var _ramda = require('ramda');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var selectRequest = function selectRequest(props) {
+  return {
+    send: props.requestReadCollage,
+    params: props.violationTypeId
+  };
+};
+
+var andWithDataRefresh = (0, _withDataRefresh2.default)((0, _ramda.prop)('violationTypeId'), selectRequest);
+var andWithLoadingIndicator = (0, _withLoadingIndicator2.default)((0, _ramda.prop)('readCollageRequest'), null);
+
+var Editor = (0, _ramda.compose)((0, _withDataRequest2.default)(selectRequest), andWithDataRefresh, andWithLoadingIndicator)(_ImageEditor2.default);
+
+var CollageEditor = function CollageEditor(props) {
+  var className = props.className,
+      style = props.style;
+
+  return _react2.default.createElement(
+    'div',
+    { style: style, className: (0, _classnames2.default)('CollageEditor', className) },
+    _react2.default.createElement(Editor, _extends({}, props, { className: 'picture-height' }))
+  );
+};
+
+CollageEditor.propTypes = {
+  requestReadCollage: _react.PropTypes.func.isRequired,
+  violationTypeId: _react.PropTypes.string.isRequired,
+  readCollageRequest: _react.PropTypes.object.isRequired,
+  imageDataUrl: _react.PropTypes.string,
+  className: _react.PropTypes.string,
+  style: _react.PropTypes.object,
+  onRectangleSelected: _react.PropTypes.func.isRequired
+};
+
+CollageEditor.defaultProps = {
+  className: null,
+  style: null,
+  collageDataUrl: null
+};
+
+var mapStateToProps = function mapStateToProps(state) {
+  var violationTypeId = _selectors2.default.getSelectedViolationTypeId(state);
+  return {
+    violationTypeId: violationTypeId,
+    readCollageRequest: _selectors2.default.getRequest(state, _requestTypes2.default.readCollage(violationTypeId)),
+    imageDataUrl: _selectors2.default.getCollageImage(state)
+  };
+};
+
+var mapActionCreatorsToProps = {
+  onRectangleSelected: _actions2.default.updateCollageSelectedRectangle,
+  requestReadCollage: _actions2.default.requestReadCollage
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapActionCreatorsToProps)(CollageEditor);
+
+//# sourceMappingURL=index-compiled.js.map

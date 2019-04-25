@@ -1,0 +1,11 @@
+.TrafficLightEditor {
+  text-align: left;
+}
+
+.TrafficLightEditor div.row div {
+  padding: 0;
+}
+
+.TrafficLightEditor div.row {
+  margin: 0;
+}

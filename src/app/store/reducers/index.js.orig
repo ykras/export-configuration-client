@@ -1,0 +1,51 @@
+'use strict';
+
+import {combineReducers} from 'redux';
+import * as common from './common';
+import * as exportTypes from './exportTypes';
+import * as exportStatus from './exportStatus';
+<<<<<<< dest
+=======
+import * as exportStatistic from './exportStatistic';
+import * as violationTypes from './violationTypes';
+import * as exportCollage from './exportCollage';
+>>>>>>> source
+
+export default combineReducers({
+  exportTypes: combineReducers({
+    byId: exportTypes.byId,
+    ids: exportTypes.ids
+  }),
+  violationTypes: combineReducers({
+    byId: violationTypes.byId,
+    ids: violationTypes.ids
+  }),
+  exportStatus: combineReducers({
+    exportEnabled: exportStatus.exportEnabled,
+    exportRepeatEnabled: exportStatus.exportRepeatEnabled,
+    exportPotokPlusEnabled: exportStatus.exportPotokPlusEnabled
+  }),
+<<<<<<< dest
+=======
+  exportStatistic: combineReducers({
+    succeeded: exportStatistic.succeeded,
+    error: exportStatistic.error,
+    lastExportTryStartTime: exportStatistic.lastExportTryStartTime,
+    lastSuccessfulExportTryEndTime: exportStatistic.lastSuccessfulExportTryEndTime,
+    lastExportedViolationTime: exportStatistic.lastExportedViolationTime
+  }),
+  exportCollage: combineReducers({
+    foregroundObjectTypes: combineReducers({
+      byId: exportCollage.foregroundObjectTypes.byId,
+      ids: exportCollage.foregroundObjectTypes.ids
+    })
+  }),
+>>>>>>> source
+  ui: combineReducers({
+    selectedExportTypeId: exportTypes.selectedExportTypeId,
+    selectedViolationTypeId: violationTypes.selectedViolationTypeId,
+    selectedForegroundCollageObjectTypeId: exportCollage.foregroundObjectTypes.selectedId,
+    toast: common.toast
+  }),
+  requests: common.requests
+});

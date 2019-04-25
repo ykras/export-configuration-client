@@ -1,0 +1,13 @@
+.CollageSettingsTableRow {
+}
+
+.CollageSettingsTableRow #name {
+  text-align: left;
+  width: 30%;
+}
+
+.CollageSettingsTableRow #value {
+  cursor: pointer;
+  text-align: center;
+  /* max-width: 300px;*/
+}

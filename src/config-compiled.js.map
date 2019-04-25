@@ -1,0 +1,1 @@
+{"version":3,"sources":["config.js"],"names":[],"mappings":"AAAA;;AAEA,IAAI,SAAS;AACX,QAAM;AADK,CAAb;;AAIA,OAAO,MAAP,GAAgB,MAAhB","file":"config-compiled.js","sourcesContent":["'use strict';\r\n\r\nvar config = {\r\n  port: 8080\r\n};\r\n\r\nwindow.config = config;\r\n"]}

@@ -1,0 +1,71 @@
+'use strict';
+
+// import 'isomorphic-fetch';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.fetchJson = undefined;
+
+require('es6-promise/auto');
+
+// const rejectErrors = res => {
+//   if (res.ok) {
+//     return res;
+//   }
+//   throw new Error(res.statusText || res.status);
+// };
+
+// const getText = res => res.text();
+//
+var toJson = function toJson(text) {
+  return text && text.length ? JSON.parse(text) : {};
+};
+
+// export const fetchJson = (url, options = {}) => {
+//   return fetch(url, {
+//     ...options,
+//     headers: {
+//       ...options.headers,
+//       'Accept': 'application/json',
+//       'Content-Type': 'application/json'
+//     }
+//   })
+//     .then(rejectErrors)
+//     .then(getText)
+//     .then(toJson);
+// };
+
+var requestJson = function requestJson(url) {
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  return new Promise(function (resolve, reject) {
+    var xhr = new XMLHttpRequest();
+    xhr.open(options.method || "GET", url);
+    if (options.headers) {
+      Object.keys(options.headers).forEach(function (key) {
+        xhr.setRequestHeader(key, options.headers[key]);
+      });
+    }
+    xhr.setRequestHeader('Accept', 'application/json');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = function () {
+      if (xhr.status >= 200 && xhr.status < 300) {
+        resolve(xhr.response);
+      } else {
+        reject(xhr.statusText);
+      }
+    };
+    xhr.onerror = function () {
+      return reject(xhr.statusText);
+    };
+    xhr.send(options.body);
+  });
+};
+
+var fetchJson = exports.fetchJson = function fetchJson(url) {
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+  return requestJson(url, options).then(toJson);
+};
+
+//# sourceMappingURL=utils-compiled.js.map

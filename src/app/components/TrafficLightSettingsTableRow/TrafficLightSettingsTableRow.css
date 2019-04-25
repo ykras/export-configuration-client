@@ -1,0 +1,13 @@
+.TrafficLightSettingsTableRow {
+
+}
+
+.TrafficLightSettingsTableRow #name {
+  text-align: left;
+  width: 30%;
+}
+
+.TrafficLightSettingsTableRow #value {
+  cursor: pointer;
+  text-align: center;
+}

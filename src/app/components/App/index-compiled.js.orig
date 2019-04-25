@@ -1,0 +1,138 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.App = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = require('react-redux');
+
+require('./App.css');
+
+var _ExportConfigTabs = require('../ExportConfigTabs');
+
+var _ExportConfigTabs2 = _interopRequireDefault(_ExportConfigTabs);
+
+var _Alert = require('../Alert');
+
+var _actions = require('../../store/actions');
+
+var _actions2 = _interopRequireDefault(_actions);
+
+var _selectors = require('../../store/selectors');
+
+var _selectors2 = _interopRequireDefault(_selectors);
+
+var _api = require('../../api');
+
+var _localization = require('../../localization');
+
+var _localization2 = _interopRequireDefault(_localization);
+
+var _statusTypes = require('../../common/statusTypes');
+
+var _statusTypes2 = _interopRequireDefault(_statusTypes);
+
+var _errorMessages = require('../../common/errorMessages');
+
+var _requestTypes = require('../../common/requestTypes');
+
+var _requestTypes2 = _interopRequireDefault(_requestTypes);
+
+var _utils = require('../../common/utils');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// import Button from '../Button';
+
+
+var content = function content() {
+  return _react2.default.createElement(
+    'div',
+    { className: 'App' },
+    _react2.default.createElement(
+      'div',
+      { className: 'container-fluid' },
+      _react2.default.createElement(
+        'div',
+        { className: 'row' },
+        _react2.default.createElement(
+          'div',
+          { className: 'col-md-12' },
+          _react2.default.createElement(_ExportConfigTabs2.default, null)
+        )
+      )
+    )
+  );
+};
+
+var App = exports.App = function (_Component) {
+  _inherits(App, _Component);
+
+  function App() {
+    _classCallCheck(this, App);
+
+    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+  }
+
+  _createClass(App, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      this.props.requestReadExportStatus(_api.baseUrl);
+      this.props.requestReadViolationTypes(_api.baseUrl);
+      this.props.requestReadRecognitionChannels(_api.baseUrl);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          readExportStatusRequest = _props.readExportStatusRequest,
+          readViolationTypesRequest = _props.readViolationTypesRequest,
+          readRecognitionChannelsRequest = _props.readRecognitionChannelsRequest;
+
+      var request = (0, _utils.combineRequests)(readExportStatusRequest, readViolationTypesRequest, readRecognitionChannelsRequest);
+      switch (request.status) {
+        case _statusTypes2.default.Success:
+          return content();
+        case _statusTypes2.default.Failure:
+          return (0, _Alert.showError)((0, _errorMessages.requestErrorMessage)(request.error));
+        default:
+          return (0, _Alert.showLoading)(_localization2.default.Loading);
+      }
+    }
+  }]);
+
+  return App;
+}(_react.Component);
+
+App.propTypes = {
+  requestReadExportStatus: _react.PropTypes.func.isRequired,
+  readExportStatusRequest: _react.PropTypes.object.isRequired,
+  requestReadViolationTypes: _react.PropTypes.func.isRequired,
+  readViolationTypesRequest: _react.PropTypes.object.isRequired,
+  requestReadRecognitionChannels: _react.PropTypes.func.isRequired,
+  readRecognitionChannelsRequest: _react.PropTypes.object.isRequired
+};
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    readExportStatusRequest: _selectors2.default.getRequest(state, _requestTypes2.default.ReadExportStatus),
+    readViolationTypesRequest: _selectors2.default.getRequest(state, _requestTypes2.default.ReadViolationTypes),
+    readRecognitionChannelsRequest: _selectors2.default.getRequest(state, _requestTypes2.default.ReadRecognitionChannels)
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, _actions2.default)(App);
+
+//# sourceMappingURL=index-compiled.js.map

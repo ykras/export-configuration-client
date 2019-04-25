@@ -1,0 +1,11 @@
+.ExportStatistic {
+
+}
+
+.ExportStatistic .error-info {
+  color: red !important
+}
+
+.ExportStatistic .date-time {
+  color: blue
+}

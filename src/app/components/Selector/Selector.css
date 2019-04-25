@@ -1,0 +1,7 @@
+.Selector {
+
+}
+
+.Selector > div.form-inline label {
+  padding-right: 10px;
+}

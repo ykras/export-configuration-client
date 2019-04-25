@@ -1,0 +1,11 @@
+.CollageTrafficLightEditor {
+  text-align: left;
+}
+
+.CollageTrafficLightEditor div.row div {
+  padding: 0;
+}
+
+.CollageTrafficLightEditor div.row {
+  margin: 0;
+}

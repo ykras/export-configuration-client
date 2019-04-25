@@ -1,0 +1,65 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+require('./Checkbox.css');
+
+var _ramda = require('ramda');
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var handle = (0, _ramda.curry)(function (handler, event) {
+  return handler(event.target.checked);
+});
+
+var Checkbox = function Checkbox(_ref) {
+  var defaultChecked = _ref.defaultChecked,
+      label = _ref.label,
+      onChanged = _ref.onChanged,
+      className = _ref.className,
+      style = _ref.style;
+  return _react2.default.createElement(
+    'div',
+    { className: (0, _classnames2.default)('Checkbox', className), style: style },
+    _react2.default.createElement(
+      'div',
+      { className: 'checkbox' },
+      _react2.default.createElement(
+        'label',
+        null,
+        _react2.default.createElement('input', { type: 'checkbox', value: '', defaultChecked: defaultChecked, onChange: handle(onChanged) }),
+        label
+      )
+    )
+  );
+};
+
+Checkbox.propTypes = {
+  defaultChecked: _react.PropTypes.bool,
+  label: _react.PropTypes.string,
+  onChanged: _react.PropTypes.func,
+  className: _react.PropTypes.string,
+  style: _react.PropTypes.object
+};
+
+Checkbox.defaultProps = {
+  defaultChecked: false,
+  label: '',
+  onChanged: function onChanged() {},
+  className: null,
+  style: null
+};
+
+exports.default = Checkbox;
+
+//# sourceMappingURL=index-compiled.js.map

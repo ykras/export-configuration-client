@@ -1,0 +1,15 @@
+.RoadSignEditor {
+  text-align: left;
+}
+
+.RoadSignEditor .FileUploader {
+  text-align: left;
+}
+
+.RoadSignEditor div.row div {
+  padding: 0;
+}
+
+.RoadSignEditor div.row {
+  margin: 0;
+}

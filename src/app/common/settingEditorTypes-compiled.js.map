@@ -1,0 +1,1 @@
+{"version":3,"sources":["settingEditorTypes.js"],"names":[],"mappings":"AAAA;;AAEA;AACA;AACA;AACA;AACA;AACA","file":"settingEditorTypes-compiled.js","sourcesContent":["'use strict';\r\n\r\n// import keyMirror from 'keymirror';\r\n//\r\n// export default keyMirror({\r\n//   Selector: null,\r\n//   TextInput: null\r\n// });\r\n"]}

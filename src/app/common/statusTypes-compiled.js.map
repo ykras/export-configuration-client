@@ -1,0 +1,1 @@
+{"version":3,"sources":["statusTypes.js"],"names":[],"mappings":"AAAA;;;;;;AAEA;;;;;;kBAEe,yBAAU;AACvB,WAAS,IADc;AAEvB,WAAS,IAFc;AAGvB,WAAS;AAHc,CAAV,C","file":"statusTypes-compiled.js","sourcesContent":["'use strict';\r\n\r\nimport keyMirror from 'keymirror';\r\n\r\nexport default keyMirror({\r\n  Pending: null,\r\n  Success: null,\r\n  Failure: null\r\n});\r\n"]}

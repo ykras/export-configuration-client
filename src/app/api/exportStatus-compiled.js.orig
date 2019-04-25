@@ -1,0 +1,49 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+var _utils = require('./utils');
+
+var _normalizr = require('normalizr');
+
+var exportType = new _normalizr.Schema('exportTypes');
+
+var normalizeFetchedData = function normalizeFetchedData(_ref) {
+  var _ref2 = _slicedToArray(_ref, 2),
+      state = _ref2[0],
+      types = _ref2[1];
+
+  return [state, (0, _normalizr.normalize)(types, (0, _normalizr.arrayOf)(exportType))];
+};
+
+var returnResult = function returnResult(_ref3) {
+  var _ref4 = _slicedToArray(_ref3, 2),
+      exportState = _ref4[0],
+      _ref4$ = _ref4[1],
+      exportTypes = _ref4$.entities.exportTypes,
+      exportTypeIds = _ref4$.result;
+
+  return _extends({}, exportState, {
+    exportTypes: exportTypes,
+    exportTypeIds: exportTypeIds
+  });
+};
+
+var urls = function urls(baseUrl) {
+  return [baseUrl + '/api/exportStatus', baseUrl + '/api/exportTypes'];
+};
+
+exports.default = {
+  readExportStatus: function readExportStatus() {
+    var baseUrl = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+    return Promise.all(urls(baseUrl).map(_utils.fetchJson)).then(normalizeFetchedData).then(returnResult);
+  }
+};
+
+//# sourceMappingURL=exportStatus-compiled.js.map

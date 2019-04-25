@@ -1,0 +1,92 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+require('./DropdownMenuButton.css');
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var handleSelectItem = function handleSelectItem(handler, itemId) {
+  return function () {
+    return handler(itemId);
+  };
+};
+
+var DropdownMenuButton = function DropdownMenuButton(_ref) {
+  var iconPath = _ref.iconPath,
+      text = _ref.text,
+      items = _ref.items,
+      selectItem = _ref.selectItem,
+      disabled = _ref.disabled,
+      className = _ref.className;
+  return _react2.default.createElement(
+    'div',
+    { className: (0, _classnames2.default)('DropdownMenuButton', className) },
+    _react2.default.createElement(
+      'div',
+      { className: 'btn-group' },
+      _react2.default.createElement(
+        'button',
+        {
+          type: 'button',
+          className: (0, _classnames2.default)('btn', 'btn-default', 'dropdown-toggle', { disabled: disabled }),
+          'data-toggle': 'dropdown'
+        },
+        iconPath ? _react2.default.createElement('img', { src: iconPath }) : null,
+        ' ',
+        text,
+        ' ',
+        _react2.default.createElement('span', { className: 'caret' })
+      ),
+      _react2.default.createElement(
+        'ul',
+        { className: 'dropdown-menu', role: 'menu' },
+        items.map(function (item) {
+          return _react2.default.createElement(
+            'li',
+            { key: item.id, value: item.id, onClick: handleSelectItem(selectItem, item.id) },
+            _react2.default.createElement(
+              'a',
+              { href: '#' },
+              item.name
+            )
+          );
+        })
+      )
+    )
+  );
+};
+
+DropdownMenuButton.propTypes = {
+  text: _react.PropTypes.string,
+  items: _react.PropTypes.arrayOf(_react.PropTypes.shape({
+    id: _react.PropTypes.string.isRequired,
+    name: _react.PropTypes.string.isRequired
+  })).isRequired,
+  selectItem: _react.PropTypes.func,
+  iconPath: _react.PropTypes.string,
+  disabled: _react.PropTypes.bool,
+  className: _react.PropTypes.string
+};
+
+DropdownMenuButton.defaultProps = {
+  text: '',
+  selectItem: function selectItem() {},
+  iconPath: null,
+  disabled: false,
+  className: null
+};
+
+exports.default = DropdownMenuButton;
+
+//# sourceMappingURL=index-compiled.js.map

@@ -1,0 +1,9 @@
+.CollageSettingValueViewer {
+  max-width: 230px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.CollageSettingValueViewer .RoadSignViewer {
+  text-align: left;
+}

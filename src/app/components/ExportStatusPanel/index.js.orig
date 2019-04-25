@@ -1,0 +1,111 @@
+'use strict';
+import React, {PropTypes} from 'react';
+import {connect} from 'react-redux';
+import './ExportStatusPanel.css';
+import Checkbox from '../Checkbox/index';
+import Selector from '../Selector/index';
+import ToggleButton from '../ToggleButton';
+import ExportStatusMessagePanel from '../ExportStatusMessagePanel';
+import localizedStrings from '../../localization';
+import actionCreators from '../../store/actions';
+import selectors from '../../store/selectors';
+import {curry} from 'ramda';
+import classNames from 'classnames';
+
+const mapExportTypesToExportFormats = exportTypes =>
+  exportTypes.map(exportType => ({key: exportType.id, value: localizedStrings[exportType.name]}));
+
+const handle = curry((handler, enabled) => handler(enabled));
+
+const exportToggle = (exportEnabled, toggleExport) => (
+  <Checkbox
+    id="export-switch"
+    label={localizedStrings.Enable} defaultChecked={exportEnabled}
+    onChanged={handle(toggleExport)}
+    />
+);
+
+const exportTypeSelector = (exportTypes, selectExportType) => (
+  <Selector
+    id="export-format-selector"
+    label={localizedStrings.ExportTypeLabel}
+    items={mapExportTypesToExportFormats(exportTypes)}
+    selectItem={selectExportType}
+    />
+);
+
+const exportRepeatToggle = toggleExportRepeat => (
+  <ToggleButton
+    id="repeat-export-switch"
+    text={localizedStrings.RepeatExport}
+    glyphicon="ok"
+    onClick={handle(toggleExportRepeat)}
+    />
+);
+
+const exportPotokPlusToggle = toggleExportPotokPlus => (
+  <Checkbox
+    id="export-potok-plus"
+    label={localizedStrings.ExportPotokPlus}
+    onChanged={handle(toggleExportPotokPlus)}
+    />
+);
+
+<<<<<<< dest
+const ExportStatusPanel = ({exportEnabled, exportTypes, selectExportType,
+=======
+const ExportStatusPanel = ({className, exportEnabled, exportTypes, selectExportType, exportPotokPlusEnabled,
+>>>>>>> source
+  toggleExport, toggleExportRepeat, toggleExportPotokPlus}) => (
+  <div className={classNames('ExportStatusPanel', className)}>
+    <div className="container-fluid">
+      <div className="row">
+        <div className="col-md-1">
+          {exportToggle(exportEnabled, toggleExport)}
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-3 vertical-bottom">
+          {exportTypeSelector(exportTypes, selectExportType)}
+        </div>
+        <div className="col-md-3 vertical-bottom form-group">
+          {exportRepeatToggle(toggleExportRepeat)}
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-3">
+          {exportPotokPlusToggle(toggleExportPotokPlus)}
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-12">
+          <ExportStatusMessagePanel/>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+ExportStatusPanel.propTypes = {
+  className: PropTypes.string,
+  exportTypes: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired
+  })).isRequired,
+  exportEnabled: PropTypes.bool.isRequired,
+  selectExportType: PropTypes.func.isRequired,
+  toggleExport: PropTypes.func.isRequired,
+  toggleExportRepeat: PropTypes.func.isRequired,
+  toggleExportPotokPlus: PropTypes.func.isRequired
+};
+
+ExportStatusPanel.defaultProps = {
+  className: null
+};
+
+const mapStateToProps = state => ({
+  exportTypes: selectors.getExportTypes(state),
+  exportEnabled: selectors.getExportEnabled(state)
+});
+
+export default connect(mapStateToProps, actionCreators)(ExportStatusPanel);

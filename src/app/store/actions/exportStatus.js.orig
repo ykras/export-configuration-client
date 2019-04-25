@@ -1,0 +1,49 @@
+'use strict';
+
+import actionTypes from '../actionTypes';
+import api from '../../api';
+import {createRequestThunk} from './common';
+import {replaceExportTypes, selectFirstExportType} from './exportTypes';
+
+export const toggleExport = exportEnabled => ({
+  type: actionTypes.ToggleExport,
+  payload: {exportEnabled}
+});
+
+export const toggleExportRepeat = exportRepeatEnabled => ({
+  type: actionTypes.ToggleExportRepeat,
+  payload: {exportRepeatEnabled}
+});
+
+export const toggleExportPotokPlus = exportPotokPlusEnabled => ({
+  type: actionTypes.ToggleExportPotokPlus,
+  payload: {exportPotokPlusEnabled}
+});
+
+<<<<<<< dest
+export const replaceExportTypes = exportTypes => ({
+  type: actionTypes.ReplaceExportTypes,
+  payload: exportTypes
+});
+
+export const selectExportType = id => ({
+  type: actionTypes.SelectExportType,
+  payload: {id}
+});
+
+const selectFirstExportType = ({exportTypeIds}) =>
+  exportTypeIds.length > 0 ? selectExportType(exportTypeIds[0]) : noop('No export type to select');
+
+=======
+>>>>>>> source
+export const requestReadExportStatus = createRequestThunk({
+  request: api.readExportStatus,
+  key: 'readExportStatus',
+  success: [
+    ({exportEnabled}) => toggleExport(exportEnabled),
+    ({exportRepeatEnabled}) => toggleExportRepeat(exportRepeatEnabled),
+    ({exportPotokPlusEnabled}) => toggleExportPotokPlus(exportPotokPlusEnabled),
+    replaceExportTypes,
+    selectFirstExportType
+  ]
+});

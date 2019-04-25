@@ -1,0 +1,1 @@
+{"version":3,"sources":["violationTypes.js"],"names":[],"mappings":"AAAA;;;;;;AAEA;;;;;;kBAEe,yBAAU;AACvB,yBAAuB,IADA;AAEvB,uBAAqB;AAFE,CAAV,C","file":"violationTypes-compiled.js","sourcesContent":["'use strict';\r\n\r\nimport keyMirror from 'keymirror';\r\n\r\nexport default keyMirror({\r\n  ReplaceViolationTypes: null,\r\n  SelectViolationType: null\r\n});\r\n"]}

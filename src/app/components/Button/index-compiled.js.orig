@@ -1,0 +1,68 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+require('./Button.css');
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _ramda = require('ramda');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var handleClick = (0, _ramda.curry)(function (handler, disabled, e) {
+  if (disabled) {
+    return;
+  }
+  handler(e);
+});
+
+var Button = function Button(_ref) {
+  var className = _ref.className,
+      style = _ref.style,
+      iconPath = _ref.iconPath,
+      text = _ref.text,
+      disabled = _ref.disabled,
+      onClick = _ref.onClick;
+  return _react2.default.createElement(
+    'div',
+    { style: style, className: (0, _classnames2.default)('Button', className) },
+    _react2.default.createElement(
+      'button',
+      { type: 'button', style: style, className: (0, _classnames2.default)('btn', 'btn-default', { disabled: disabled }), onClick: handleClick(onClick, disabled) },
+      iconPath ? _react2.default.createElement('img', { src: iconPath }) : null,
+      ' ',
+      text
+    )
+  );
+};
+
+Button.propTypes = {
+  text: _react.PropTypes.string,
+  iconPath: _react.PropTypes.string,
+  disabled: _react.PropTypes.bool,
+  className: _react.PropTypes.string,
+  onClick: _react.PropTypes.func,
+  style: _react.PropTypes.object
+};
+
+Button.defaultProps = {
+  text: '',
+  iconPath: null,
+  disabled: false,
+  className: null,
+  onClick: function onClick() {},
+  style: null
+};
+
+exports.default = Button;
+
+//# sourceMappingURL=index-compiled.js.map
